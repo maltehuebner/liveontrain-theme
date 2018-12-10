@@ -13,7 +13,11 @@
         <time class="entry-format">
             <?php echo (new \DateTime(sprintf('@%d', get_post_time())))->format('l, d. F Y'); ?>
         </time>
-		<h1 class="entry-title"><?php the_title(); ?></h1>
+        <a href="<?php the_permalink(); ?>" rel="bookmark">
+            <h1 class="entry-title">
+                <?php the_title(); ?>
+            </h1>
+        </a>
 
 		<?php if ( 'post' == get_post_type() ) : ?>
 		<div class="entry-meta">
