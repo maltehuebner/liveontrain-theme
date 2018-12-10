@@ -10,9 +10,9 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-        <h3 class="entry-format">
+        <time class="entry-format">
             <?php echo (new \DateTime(sprintf('@%d', get_post_time())))->format('l, d. F Y'); ?>
-        </h3>
+        </time>
 		<h1 class="entry-title"><?php the_title(); ?></h1>
 
 		<?php if ( 'post' == get_post_type() ) : ?>
@@ -20,6 +20,21 @@
 			<?php twentyeleven_posted_on(); ?>
 		</div><!-- .entry-meta -->
 		<?php endif; ?>
+
+        <span class="caldera_journey-lines">
+            Linie:
+            <?php
+            $lines = wp_get_post_terms(get_the_ID(), 'line');
+
+            $resultLines = array_map(function(WP_Term $line): string
+            {
+                return sprintf('<a href="%s" title="Mehr zur Linie %s">%s</a>', $line->slug, $line->name, $line->name);
+            }, $lines);
+
+            echo join(', ', $resultLines);
+            ?>
+        </span>
+
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
